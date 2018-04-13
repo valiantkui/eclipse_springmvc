@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
+
+	<!--配置组建扫描  -->
+	<context:component-scan base-package="daoimpl" />
+	<context:component-scan base-package="mytest" />
+	
+	<util:properties id="config" location="classpath:DB.properties"></util:properties>
+
+	<!-- 配置连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="#{config.driverClassName}"/>
+		<property name="url" value="#{config.url}"/>
+		<property name="username" value="#{config.username}"/>
+		<property name="password" value="#{config.password}"/>
+	</bean>
+	
+	
+	<!--  配置jdbcTemplate
+		它提供了一些方法，用来简化访问数据库的代码
+		-->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+</beans>
