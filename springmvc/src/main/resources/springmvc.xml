@@ -7,7 +7,9 @@
                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd ">
 
 	
-	<!-- 配置handlerMapping -->
+	<!-- 配置handlerMapping
+		DispatcherServlet接收到请求后会参看如下配置信息，然后找到对应的Controller
+	-->
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 	
 		<property name="mappings">
